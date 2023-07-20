@@ -27,9 +27,6 @@ def calculate_lpips(image1, image2, lpips, device):
     distance = lpips(image1_tensor, image2_tensor)
     return distance.item()
 
-def calculate_mse(image1, image2):
-    return torch.mean((F.to_tensor(image1) - F.to_tensor(image2)) ** 2).item()
-
 def calculate_fid(folder1, folder2, device):
     return fid_score.calculate_fid_given_paths([folder1, folder2], batch_size=32, device=device, dims=2048)
 
@@ -41,7 +38,6 @@ def calculate_metrics(folder1, folder2):
         'SSIM': [],
         'PSNR': [],
         'LPIPS': [],
-        'MSE': [],
         'FID': []
     }
 
@@ -57,12 +53,10 @@ def calculate_metrics(folder1, folder2):
         ssim_value = calculate_ssim(image1, image2)
         psnr_value = calculate_psnr(image1, image2)
         lpips_value = calculate_lpips(image1, image2, lpips, device)
-        mse_value = calculate_mse(image1, image2)
 
         metrics['SSIM'].append(ssim_value)
         metrics['PSNR'].append(psnr_value)
         metrics['LPIPS'].append(lpips_value)
-        metrics['MSE'].append(mse_value)
 
     fid_value = calculate_fid(folder1, folder2, device)
 
@@ -70,7 +64,6 @@ def calculate_metrics(folder1, folder2):
         'SSIM': sum(metrics['SSIM']) / len(metrics['SSIM']),
         'PSNR': sum(metrics['PSNR']) / len(metrics['PSNR']),
         'LPIPS': sum(metrics['LPIPS']) / len(metrics['LPIPS']),
-        'MSE': sum(metrics['MSE']) / len(metrics['MSE']),
         'FID': fid_value
     }
 
