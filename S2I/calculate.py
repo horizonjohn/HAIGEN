@@ -78,17 +78,8 @@ def calculate_metrics(folder1, folder2):
 
 
 if __name__ == '__main__':
-    folder1 = 'D://JJN/gen/HAIGEN/generate/lstm_2/gen/'
-
-    # folder1 = 'D://JJN/gen/NeurIPS 2017BicycleGAN-master/BicycleGAN/'
-    # folder1 = 'D://JJN/gen/NIPS 2018Unsupervised Attention-Guided Image-to-Image Translation/UAGITI'
-    # folder1 = 'D://JJN/gen/ECCV2018MUNIT-master/MUNIT/02/'
-    # folder1 = 'D://JJN/gen/ECCV2020Unsupervised-Sketch-to-Photo-Synthesis-main/step1/USTP/'
-    # folder1 = 'D://JJN/gen/pix2pix/pix2pix/'
-    # folder1 = 'D://JJN/gen/pix2pixHD-master/pix2pixHD/'
-    # folder1 = 'D://JJN/gen/UGATIT-pytorch-master/UGATIT/'
-
-    folder2 = 'D://JJN/gen/HAIGEN/generate/full/org/'
+    folder1 = './HAIGEN/generate/lstm/gen/'
+    folder2 = './HAIGEN/generate/lstm/org/'
 
     mean_metrics = calculate_metrics(folder1, folder2)
 
