@@ -1,4 +1,6 @@
-# HAIGEN [Part 02: Sketch-to-Image synthesis]
+# HAIGEN 
+## [Part 02: Sketch-to-Image synthesis]
+
 ***
 A Creative Style Generation Framework for Fashion Design
 
