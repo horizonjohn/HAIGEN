@@ -12,3 +12,9 @@ Our framework is divided into two parts：
 ## Part 02: Sketch-to-Image synthesis
 
 [Link](./S2I)
+
+## New Dataset
+
+[HAIFashion](https://drive.google.com/file/d/1hbFUNToU7CtMqz6shqNsybYt4VhIBMlW/view?usp=drive_link)
+
+
