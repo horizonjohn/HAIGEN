@@ -1,6 +1,8 @@
 # HAIGEN
 A Creative Style Generation Framework for Fashion Design
 
+We will update the code soon ~
+
 ***
 
 Our framework is divided into two parts：
