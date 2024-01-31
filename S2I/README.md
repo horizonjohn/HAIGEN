@@ -14,23 +14,20 @@ For datasets that have paired sketch-image data, the path should be formatted as
 ./dataset/testA/  # testing reference (sketch)
 ./dataset/testB/  # testing ground truth (image)
 ```
-After that, the configuration should be specified in config file in:
-```yaml
-./config.yml  # config file
-```
+
 Our Sketch-to-Image synthesis dataset is avialable [**HAIFashion**](https://drive.google.com/file/d/18nQfq7I7XUwXVFOqNbKmiyOnWaBJmw-_/view?usp=drive_link).
 
 
 ## Train and Test
 ### Train
-set **model=1** in **main.py** and run:
+run:
 ```yaml
 python main.py
 ```
 
 ### test
-set **model=2** in **main.py** and run:
+run:
 ```yaml
-python main.py
+python infer.py
 ```
 Note: you should change your checkpoint path.

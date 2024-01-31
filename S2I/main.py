@@ -1,122 +1,93 @@
-import os
-import cv2
-import random
-import numpy as np
-import torch
 import argparse
-from src.config import Config
-from src.edge_connect import EdgeConnect
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from diffusion.resample import create_named_schedule_sampler
+from utils import dist_util, logger
+from utils.image_datasets import load_data, load_data_local
+from utils.train_util import TrainLoop
+from utils.script_util import (
+    model_and_diffusion_defaults,
+    create_model_and_diffusion,
+    args_to_dict,
+    add_dict_to_argparser,
+)
 
 
-def main(mode=None):
-    config = load_config(mode)
+def main():
+    args = create_argparser().parse_args()
 
-    # cuda visble devices
-    os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(str(e) for e in config.GPU)
+    dist_util.setup_dist()
+    logger.configure(dir=args.log_dir)
 
-    # init device
-    if torch.cuda.is_available():
-        config.DEVICE = torch.device("cuda")
-        torch.backends.cudnn.benchmark = True  # cudnn auto-tuner
-    else:
-        config.DEVICE = torch.device("cpu")
+    logger.log(args)
 
-    # set cv2 running threads to 1 (prevents deadlocks with pytorch dataloader)
-    cv2.setNumThreads(0)
+    logger.log("creating model and diffusion...")
 
-    # initialize random seed
-    random.seed(config.SEED)
-    np.random.seed(config.SEED)
-    torch.manual_seed(config.SEED)
-    torch.cuda.manual_seed_all(config.SEED)
-    # torch.backends.cudnn.deterministic = True
-    # torch.backends.cudnn.benchmark = False
+    model, diffusion = create_model_and_diffusion(
+        **args_to_dict(args, model_and_diffusion_defaults().keys())
+    )
+    model.to(dist_util.dev())
+    schedule_sampler = create_named_schedule_sampler(args.schedule_sampler, diffusion)
 
-    # build the model and initialize
-    model = EdgeConnect(config)
-    model.load()
+    logger.log("creating data loader...")
 
-    # model training
-    if config.MODE == 1:
-        config.print()
-        print('\nstart training...\n')
-        model.train()
+    if args.stage == 1:
+        data = load_data(
+            data_dir=args.data_dir,
+            batch_size=args.batch_size,
+            num_workers=args.num_workers,
+            mode=args.mode,
+        )
+    elif args.stage == 2:
+        data = load_data_local(
+            data_dir=args.data_dir,
+            batch_size=args.batch_size,
+        )
 
-    # model test
-    elif config.MODE == 2:
-        print('\nstart testing...\n')
-        model.test()
+    logger.log("training...")
+    TrainLoop(
+        model=model,
+        diffusion=diffusion,
+        data=data,
+        batch_size=args.batch_size,
+        lr=args.lr,
+        log_interval=args.log_interval,
+        save_interval=args.save_interval,
+        resume_checkpoint=args.resume_checkpoint,
+        schedule_sampler=schedule_sampler,
+        weight_decay=args.weight_decay,
+        stage=args.stage,
+        max_steps=args.max_steps,
+        auto_scale_grad_clip=args.auto_scale_grad_clip,
+    ).run_loop()
 
-    # eval mode
-    elif config.MODE == 3:
-        print('\nstart eval...\n')
-        model.eval()
 
-    else:
-        return model
-
-
-def load_config(mode=None):
+def create_argparser():
+    defaults = dict(
+        data_dir="../dataset/",
+        mode='train',
+        schedule_sampler="uniform",
+        lr=1e-4,
+        weight_decay=0.0,
+        batch_size=4,
+        log_interval=10,
+        save_interval=5000,
+        resume_checkpoint="",
+        log_dir="logs/",
+        num_workers=8,
+        max_steps=50000,
+        auto_scale_grad_clip=1.0,
+        stage=1,
+    )
+    defaults.update(model_and_diffusion_defaults())
     parser = argparse.ArgumentParser()
-    parser.add_argument('--path', '--checkpoints', type=str, default='./checkpoints',
-                        help='model checkpoints path (default: ./checkpoints)')
-    parser.add_argument('--model', type=int, choices=[1, 2, 3, 4],
-                        help='1: edge model, 2: inpaint model, 3: edge-inpaint model, 4: joint model')
+    add_dict_to_argparser(parser, defaults)
 
-    # test mode
-    if mode == 2:
-        parser.add_argument('--input', type=str, help='path to the input images directory or an input image')
-        parser.add_argument('--mask', type=str, help='path to the masks directory or a mask file')
-        parser.add_argument('--edge', type=str, help='path to the edges directory or an edge file')
-        parser.add_argument('--output', type=str, help='path to the output directory')
-
-    args = parser.parse_args()
-
-    # create checkpoints path if does't exist
-    if not os.path.exists(args.path):
-        os.makedirs(args.path)
-
-    # load config file
-    config = Config('./config.yml')
-    config.PATH = args.path
-
-    # train mode
-    if mode == 1:
-        config.MODE = 1
-        if args.model:
-            config.MODEL = args.model
-
-    # test mode
-    elif mode == 2:
-        config.MODE = 2
-        config.MODEL = args.model if args.model is not None else 3
-
-        if args.input is not None:
-            config.TEST_FLIST = args.input
-
-        if args.mask is not None:
-            config.TEST_MASK_FLIST = args.mask
-
-        if args.edge is not None:
-            config.TEST_EDGE_FLIST = args.edge
-
-        if args.output is not None:
-            config.RESULTS = args.output
-
-    # eval mode
-    elif mode == 3:
-        config.MODE = 3
-        config.MODEL = args.model if args.model is not None else 3
-
-    return config
+    return parser
 
 
 if __name__ == "__main__":
-    """
-    mode (int): 
-    1: train, 2: test, 3: eval, 
-    reads from config file if not specified
-    """
-
-    os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-    main(mode=1)
+    main()
