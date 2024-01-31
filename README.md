@@ -9,7 +9,7 @@ Our framework is divided into two parts：
 
 [Link](./I2S/)
 
-## Part 02: Sketch-to-Image synthesis
+## Part 02: Sketch-to-Image Style Transfer
 
 [Link](./S2I)
 
