@@ -5,7 +5,7 @@ We will update the code soon ~
 
 ***
 
-Our framework is divided into two parts：
+Some modules in our framework are presented as follows：
 
 ## Part 01: Image-to-Sketch Generation
 
