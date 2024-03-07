@@ -1,5 +1,4 @@
-# HAIGEN
-A Creative Style Generation Framework for Fashion Design
+# HAIGEN: Towards Human-AI Collaboration for Facilitating Creativity and Style Generation in Fashion Design
 
 We will update the code soon ~
 
