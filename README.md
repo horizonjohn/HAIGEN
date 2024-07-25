@@ -1,12 +1,14 @@
 # HAIGEN: Towards Human-AI Collaboration for Facilitating Creativity and Style Generation in Fashion Design
 
-## Framework
-
-<br>
+## 🖼️ Framework
 
 <div align=center><img src="./figs/HAIGEN.png" width = 90%></div>
 
 <br>
+
+You can find the [Demo Video](https://youtu.be/ijIJdaOUrlo).
+
+***
 
 The four modules in our framework are presented as follows：
 
