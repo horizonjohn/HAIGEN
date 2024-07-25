@@ -1,5 +1,5 @@
 # HAIGEN 
-## [Part 02: Sketch-to-Image Style Transfer]
+## [Part 04: Sketch-to-Image Style Transfer]
 
 ***
 A Creative Style Generation Framework for Fashion Design
