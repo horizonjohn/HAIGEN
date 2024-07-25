@@ -4,7 +4,7 @@
 
 <br>
 
-<div align=center><img src="./figs/frame.png" width = 90%></div>
+<div align=center><img src="./figs/HAIGEN.png" width = 90%></div>
 
 <br>
 
