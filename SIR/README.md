@@ -1,4 +1,4 @@
 # HAIGEN 
-## [Part 03: Sketch-based Image Retrieval]
+## [Part 03: Sketch Recommendation Module]
 
 ***
