@@ -1,17 +1,26 @@
 # HAIGEN: Towards Human-AI Collaboration for Facilitating Creativity and Style Generation in Fashion Design
 
-Some modules in our framework are presented as follows：
+## Framework
 
-## Part 01: Image-to-Sketch Generation
+<br>
 
-[Link](./I2S/)
+<div align=center><img src="./figs/frame.png" width = 90%></div>
 
-## Part 02: Sketch-to-Image Style Transfer
+<br>
 
-[Link](./S2I)
+The four modules in our framework are presented as follows：
 
-## Dataset
+## Part 01: Text-to-Image Generation
+🧩 It has been integrated into the [Wondershare AI Draw](https://aigc.wondershare.com/app/image-gen) 🤗
 
-[Part 01] Three Designers sketch-image pairs in [Clothes-V1](https://drive.google.com/file/d/1dPNQOaFYMRY2sxREs8Is-G3ltpi61Ftm/view?usp=drive_link)
+## Part 02: Image-to-Sketch Generation
 
-[Part 02] Style Transfer sketch-image pairs in [HAIFashion](https://drive.google.com/file/d/1Cy8I92VYnBEgWbpIvLsy5VcYPliJ1PON/view?usp=drive_link)
+🧩 Please refer to the [I2S README](./I2S/) 🤗
+
+## Part 03: Sketch-based Image Retrieval
+
+🧩 Please refer to the [SIR README](./SIR) 🤗
+
+## Part 04: Sketch-to-Image Style Transfer
+
+🧩 Please refer to the [S2I README](./S2I) 🤗
