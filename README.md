@@ -12,17 +12,17 @@ You can find the [Demo Video](https://youtu.be/ijIJdaOUrlo).
 
 The four modules in our framework are presented as follows：
 
-## Part 01: Text-to-Image Generation
+## Part 01: Text-to-Image Cloud Module
 🧩 It has been integrated into the [Wondershare AI Draw](https://aigc.wondershare.com/app/image-gen) 🤗
 
-## Part 02: Image-to-Sketch Generation
+## Part 02: Image-to-Sketch Local Module
 
 🧩 Please refer to the [I2S README](./I2S/) 🤗
 
-## Part 03: Sketch-based Image Retrieval
+## Part 03: Sketch Recommendation Module
 
 🧩 Please refer to the [SIR README](./SIR) 🤗
 
-## Part 04: Sketch-to-Image Style Transfer
+## Part 04: Style Transfer Module
 
 🧩 Please refer to the [S2I README](./S2I) 🤗
