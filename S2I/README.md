@@ -1,8 +1,7 @@
 # HAIGEN 
-## [Part 04: Sketch-to-Image Style Transfer]
+## [Part 04: Style Transfer Module]
 
 ***
-A Creative Style Generation Framework for Fashion Design
 
 Our model weights is avialable [**checkpoint**](https://drive.google.com/drive/folders/1buA1_4TSS8QaUhNH_om4PltAfo4mlFLR)
 
