@@ -1,5 +1,5 @@
 # HAIGEN
-## [Part 01: Image-to-Sketch Generation]
+## [Part 02: Image-to-Sketch Generation]
 
 ***
 A Creative Style Generation Framework for Fashion Design
