@@ -30,7 +30,7 @@ python evaluate.py.py
 ```
 Note: you should change your checkpoint path.
 
-### 3. Results
+### 3. Result
 
 <div align=center><img src="../figs/i2s_gen.png" width = 90%></div>
 
