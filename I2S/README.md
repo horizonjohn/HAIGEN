@@ -29,3 +29,9 @@ python main.py
 python evaluate.py.py
 ```
 Note: you should change your checkpoint path.
+
+### results
+
+<div align=center><img src="../figs/i2s_gen.png" width = 90%></div>
+
+<br>
