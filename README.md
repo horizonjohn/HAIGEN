@@ -14,15 +14,17 @@ The four modules in our framework are presented as follows：
 
 ## Part 01: Text-to-Image Cloud Module
 
-<div align=center><img src="./figs/TIM.png" width = 90%></div>
+🧩 It has been integrated into the [Wondershare AI Draw](https://aigc.wondershare.com/app/image-gen) 🤗
+
+<be>
+
+<div align=center><img src="./figs/TIM.png" width = 88%></div>
 
 <br>
 
 <div align=center><img src="./figs/t2i_gen.png" width = 90%></div>
 
 <br>
-
-🧩 It has been integrated into the [Wondershare AI Draw](https://aigc.wondershare.com/app/image-gen) 🤗
 
 ## Part 02: Image-to-Sketch Local Module
 
