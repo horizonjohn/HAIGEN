@@ -1,6 +1,10 @@
 # HAIGEN
 ## [Part 02: Image-to-Sketch Local Module]
 
+<div align=center><img src="../figs/ISM.png" width = 90%></div>
+
+<br>
+
 ***
 
 Our model weights is avialable [**checkpoint**](https://drive.google.com/drive/folders/1-_ts9fbZsR7ZMy6I9fqu_hKV1hho_Ufa?usp=drive_link)
